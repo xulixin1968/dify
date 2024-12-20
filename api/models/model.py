@@ -1385,6 +1385,7 @@ class ApiToken(db.Model):
         db.Index("api_token_app_id_type_idx", "app_id", "type"),
         db.Index("api_token_token_idx", "token", "type"),
         db.Index("api_token_tenant_idx", "tenant_id", "type"),
+        db.Index("api_token_created_by_idx", "created_by"),
     )
 
     id = db.Column(StringUUID, server_default=db.text("uuid_generate_v4()"))
@@ -1393,6 +1394,7 @@ class ApiToken(db.Model):
     type = db.Column(db.String(16), nullable=False)
     token = db.Column(db.String(255), nullable=False)
     last_used_at = db.Column(db.DateTime, nullable=True)
+    created_by = db.Column(StringUUID, nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, server_default=db.text("CURRENT_TIMESTAMP(0)"))
 
     @staticmethod
