@@ -52,6 +52,8 @@ const InputVarList: FC<Props> = ({
       return 'Files'
     else if (type === FormTypeEnum.select)
       return 'Options'
+    else if (type === FormTypeEnum.multiSelect)
+      return 'Array'
     else
       return 'String'
   }
@@ -133,9 +135,10 @@ const InputVarList: FC<Props> = ({
           const varInput = value[variable]
           const isNumber = type === FormTypeEnum.textNumber
           const isSelect = type === FormTypeEnum.select
+          const isMultiSelect = type === FormTypeEnum.multiSelect
           const isFile = type === FormTypeEnum.file
           const isFileArray = type === FormTypeEnum.files
-          const isString = !isNumber && !isSelect && !isFile && !isFileArray
+          const isString = !isNumber && !isSelect && !isMultiSelect && !isFile && !isFileArray
 
           return (
             <div key={variable} className='space-y-1'>
@@ -172,6 +175,20 @@ const InputVarList: FC<Props> = ({
                   schema={schema}
                 />
               )}
+              {
+                isMultiSelect && (
+                  <VarReferencePicker
+                    readonly={readOnly}
+                    isShowNodeName
+                    nodeId={nodeId}
+                    value={varInput?.value || []}
+                    onChange={handleNotMixedTypeChange(variable)}
+                    onOpen={handleOpen(index)}
+                    defaultVarKindType={VarKindType.variable}
+                    filterVar={(varPayload: Var) => varPayload.type === VarType.arrayString || varPayload.type === VarType.arrayNumber}
+                  />
+                )
+              }
               {isFile && (
                 <VarReferencePicker
                   readonly={readOnly}

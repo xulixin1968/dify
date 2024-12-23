@@ -166,7 +166,7 @@ class BaseAgentRunner(AppRunner):
             }:
                 continue
             enum = []
-            if parameter.type == ToolParameter.ToolParameterType.SELECT:
+            if parameter.type in {ToolParameter.ToolParameterType.SELECT, ToolParameter.ToolParameterType.MULTI_SELECT}:
                 enum = [option.value for option in parameter.options]
 
             message_tool.parameters["properties"][parameter.name] = {
@@ -257,7 +257,7 @@ class BaseAgentRunner(AppRunner):
             }:
                 continue
             enum = []
-            if parameter.type == ToolParameter.ToolParameterType.SELECT:
+            if parameter.type in {ToolParameter.ToolParameterType.SELECT, ToolParameter.ToolParameterType.MULTI_SELECT}:
                 enum = [option.value for option in parameter.options]
 
             prompt_tool.parameters["properties"][parameter.name] = {
