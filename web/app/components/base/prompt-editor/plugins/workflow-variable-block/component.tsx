@@ -96,7 +96,7 @@ const WorkflowVariableBlockComponent = ({
       y: (clientHeight - node.height! * zoom) / 2 - position!.y * zoom,
       zoom: transform[2],
     })
-  }, [node.height, node.position, node.width, reactflow, store])
+  }, [node, reactflow, store])
 
   const Item = (
     <div
