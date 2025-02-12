@@ -230,7 +230,6 @@ const Editor: FC<Props> = ({
                       show: true,
                       variables: nodesOutputVars || [],
                       workflowNodesMap: availableNodes.reduce((acc, node) => {
-                        console.log(node)
                         acc[node.id] = {
                           title: node.data.title,
                           type: node.data.type,
