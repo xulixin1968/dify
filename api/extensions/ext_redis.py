@@ -9,7 +9,7 @@ from redis.sentinel import Sentinel
 from configs import dify_config
 from dify_app import DifyApp
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class KeyPrefixMethodProxy(Generic[T]):
@@ -20,6 +20,7 @@ class KeyPrefixMethodProxy(Generic[T]):
     If a method's argument contains'key', prefix it.
     If the method's positional parameter contains a key of type string, prefix it.
     """
+
     def __init__(self, client: T, prefix: str):
         self._client = client
         self._prefix = prefix
@@ -33,13 +34,14 @@ class KeyPrefixMethodProxy(Generic[T]):
     def _wrap_method(self, method: Callable) -> Callable:
         @functools.wraps(method)
         def wrapper(*args, **kwargs):
-            if 'key' in kwargs:
-                if isinstance(kwargs['key'], str):
-                    kwargs['key'] = self._add_prefix(kwargs['key'])
+            if "key" in kwargs:
+                if isinstance(kwargs["key"], str):
+                    kwargs["key"] = self._add_prefix(kwargs["key"])
             elif args:
                 if args and isinstance(args[0], str):
                     args = (self._add_prefix(args[0]),) + args[1:]
             return method(*args, **kwargs)
+
         return wrapper
 
     def _add_prefix(self, key: str) -> str:
@@ -125,8 +127,10 @@ def init_app(app: DifyApp):
             for node in dify_config.REDIS_CLUSTERS.split(",")
         ]
         # FIXME: mypy error here, try to figure out how to fix it
-        redis_client.initialize(RedisCluster(startup_nodes=nodes, password=dify_config.REDIS_CLUSTERS_PASSWORD),
-                                prefix=dify_config.REDIS_KEY_PREFIX)  # type: ignore
+        redis_client.initialize(
+            RedisCluster(startup_nodes=nodes, password=dify_config.REDIS_CLUSTERS_PASSWORD),
+            prefix=dify_config.REDIS_KEY_PREFIX,
+        )  # type: ignore
     else:
         redis_params.update(
             {
