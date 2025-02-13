@@ -1,5 +1,5 @@
-from typing import Any, Union, Callable, TypeVar, Generic
 import functools
+from typing import Any, Callable, Generic, TypeVar, Union
 
 import redis
 from redis.cluster import ClusterNode, RedisCluster
@@ -125,7 +125,8 @@ def init_app(app: DifyApp):
             for node in dify_config.REDIS_CLUSTERS.split(",")
         ]
         # FIXME: mypy error here, try to figure out how to fix it
-        redis_client.initialize(RedisCluster(startup_nodes=nodes, password=dify_config.REDIS_CLUSTERS_PASSWORD), prefix=dify_config.REDIS_KEY_PREFIX)  # type: ignore
+        redis_client.initialize(RedisCluster(startup_nodes=nodes, password=dify_config.REDIS_CLUSTERS_PASSWORD),
+                                prefix=dify_config.REDIS_KEY_PREFIX)  # type: ignore
     else:
         redis_params.update(
             {
