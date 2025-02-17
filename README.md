@@ -54,6 +54,9 @@
 
 Dify is an open-source LLM app development platform. Its intuitive interface combines agentic AI workflow, RAG pipeline, agent capabilities, model management, observability features and more, letting you quickly go from prototype to production. 
 
+### Dify OpenVINO Model Server Integration for local LLM inferencing
+See [README_OVMS_ingegration.md](./README_OVMS_integration.md) for details.
+
 ## Quick start
 > Before installing Dify, make sure your machine meets the following minimum system requirements:
 > 
