@@ -240,6 +240,7 @@ class KnowledgeRetrievalNode(BaseNode[KnowledgeRetrievalNodeData]):
                                 "segment_word_count": segment.word_count,
                                 "segment_position": segment.position,
                                 "segment_index_node_hash": segment.index_node_hash,
+                                "segment_page_number": segment.page_number,
                             },
                             "title": document.name,
                         }
