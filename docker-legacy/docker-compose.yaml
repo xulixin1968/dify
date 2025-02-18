@@ -59,7 +59,6 @@ services:
       REDIS_USE_SSL: 'false'
       # use redis db 0 for redis cache
       REDIS_DB: 0
-      REDIS_KEY_PREFIX: ''
       # The configurations of celery broker.
       # Use redis as the broker, and redis db 1 for celery broker.
       CELERY_BROKER_URL: redis://:difyai123456@redis:6379/1
@@ -255,7 +254,6 @@ services:
       REDIS_USERNAME: ''
       REDIS_PASSWORD: difyai123456
       REDIS_DB: 0
-      REDIS_KEY_PREFIX: ''
       REDIS_USE_SSL: 'false'
       # The configurations of celery broker.
       CELERY_BROKER_URL: redis://:difyai123456@redis:6379/1
