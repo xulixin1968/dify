@@ -128,9 +128,9 @@ def init_app(app: DifyApp):
         ]
         # FIXME: mypy error here, try to figure out how to fix it
         redis_client.initialize(
-            RedisCluster(startup_nodes=nodes, password=dify_config.REDIS_CLUSTERS_PASSWORD),
+            RedisCluster(startup_nodes=nodes, password=dify_config.REDIS_CLUSTERS_PASSWORD),  # type: ignore
             prefix=dify_config.REDIS_KEY_PREFIX,
-        )  # type: ignore
+        )
     else:
         redis_params.update(
             {
